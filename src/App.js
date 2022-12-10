@@ -6,6 +6,7 @@ import BGDark from "./assets/bg-desktop-dark.jpg";
 import BGLight from "./assets/bg-desktop-light.jpg";
 import mobileBGDark from "./assets/bg-mobile-dark.jpg";
 import mobileBGLight from "./assets/bg-mobile-light.jpg";
+import Input from "./components/Input";
 
 const Wrapper = styled("div", {
   maxWidth: 544,
@@ -21,6 +22,11 @@ const Header = styled("div", {
   justifyContent: "space-between",
   alignItems: "center",
   color: "white",
+
+  "& h1": {
+    letterSpacing: 14,
+    fontWeight: 600,
+  },
 });
 const Img = styled("img", {
   cursor: "pointer",
@@ -63,6 +69,7 @@ function App() {
           alt={darkMode ? "sun" : "moon"}
         />
       </Header>
+      <Input darkMode={darkMode} />
     </Wrapper>
   );
 }
