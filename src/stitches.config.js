@@ -14,7 +14,7 @@ export const {
     colors: {
       BrightBlue: "hsl(220, 98%, 61%)",
       CheckBackground:
-        "linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%)",
+        "linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))",
 
       VeryLightGray1: "hsl(0, 0%, 98%)",
       VeryLightGrayishBlue1: "hsl(236, 33%, 92%)",

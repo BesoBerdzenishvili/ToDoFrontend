@@ -7,6 +7,7 @@ import BGLight from "./assets/bg-desktop-light.jpg";
 import mobileBGDark from "./assets/bg-mobile-dark.jpg";
 import mobileBGLight from "./assets/bg-mobile-light.jpg";
 import Input from "./components/Input";
+import Tasks from "./components/Tasks";
 
 const Wrapper = styled("div", {
   maxWidth: 544,
@@ -70,6 +71,8 @@ function App() {
         />
       </Header>
       <Input darkMode={darkMode} />
+      <br />
+      <Tasks darkMode={darkMode} />
     </Wrapper>
   );
 }

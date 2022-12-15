@@ -1,11 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import useTasksContext from "../hooks/useTasksContext";
 import { styled } from "../stitches.config";
+
+export const useClickOutside = (handler) => {
+  const domNode = useRef();
+  useEffect(() => {
+    const onMouseDown = (event) => {
+      if (!domNode.current.contains(event.target)) {
+        handler();
+      }
+    };
+    document.addEventListener("mousedown", onMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+    };
+  });
+  return domNode;
+};
 
 const Wrapper = styled("div", {
   display: "flex",
   justifyContent: "space-around",
   backgroundColor: "white",
-  padding: 14,
+  padding: "14px 21px",
   margin: "44px 0 0 0",
   borderRadius: 7,
 
@@ -62,8 +79,13 @@ const Error = styled("div", {
 });
 
 export default function Input({ darkMode }) {
+  const { dispatch } = useTasksContext();
   const [text, setText] = useState("");
   const [error, setError] = useState("");
+
+  const domNode = useClickOutside(() => {
+    setError("");
+  });
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
@@ -83,7 +105,7 @@ export default function Input({ darkMode }) {
       if (response.ok) {
         setError("");
         setText("");
-        console.log("task added");
+        dispatch({ type: "CREATE_TASK", payload: json });
       }
     }
   };
@@ -100,7 +122,7 @@ export default function Input({ darkMode }) {
           onKeyDown={handleKeyDown}
         />
       </Wrapper>
-      {error && <Error>{error}</Error>}
+      {error && <Error ref={domNode}>{error}</Error>}
     </>
   );
 }
