@@ -1,24 +1,10 @@
-import { useEffect } from "react";
-import useTasksContext from "../hooks/useTasksContext";
+import Loading from "../assets/Loading";
 import Task from "./Task";
 
-export default function Tasks({ darkMode }) {
-  const { tasks, dispatch } = useTasksContext();
-  console.log(tasks, "tasks");
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await fetch("/api/tasks");
-      const json = await response.json();
-      if (response.ok) {
-        dispatch({ type: "SET_TASKS", payload: json });
-      }
-    };
-
-    fetchTasks();
-  }, [dispatch]);
+export default function Tasks({ tasks, darkMode, loading }) {
   return (
     <div>
-      {tasks &&
+      {tasks ? (
         tasks.map((i) => (
           <Task
             key={i._id}
@@ -27,7 +13,12 @@ export default function Tasks({ darkMode }) {
             isCompleted={i.isCompleted}
             darkMode={darkMode}
           />
-        ))}
+        ))
+      ) : loading ? (
+        <Loading />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
