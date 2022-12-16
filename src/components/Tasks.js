@@ -1,7 +1,24 @@
+import { useState, useEffect } from "react";
+import useTasksContext from "../hooks/useTasksContext";
 import Loading from "../assets/Loading";
 import Task from "./Task";
 
-export default function Tasks({ tasks, darkMode, loading }) {
+export default function Tasks({ darkMode }) {
+  const [loading, setLoading] = useState(null);
+
+  const { tasks, dispatch } = useTasksContext();
+  useEffect(() => {
+    const fetchTasks = async () => {
+      setLoading(true);
+      const response = await fetch("/api/tasks");
+      const json = await response.json();
+      if (response.ok) {
+        dispatch({ type: "SET_TASKS", payload: json });
+        setLoading(null);
+      }
+    };
+    fetchTasks();
+  }, [dispatch, tasks]);
   return (
     <div>
       {tasks ? (
