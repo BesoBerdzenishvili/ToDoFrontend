@@ -53,6 +53,28 @@ const OuterCircle = styled("label", {
   },
 });
 
+const EditInput = styled("input", {
+  fontSize: 17,
+  color: "black",
+  backgroundColor: "transparent",
+  border: "none",
+  height: "100%",
+  marginLeft: 17,
+  width: 414,
+
+  variants: {
+    darkMode: {
+      true: {
+        color: "white",
+      },
+    },
+  },
+
+  "@bp1": {
+    width: 224,
+  },
+});
+
 const Input = styled("input", {
   width: 0,
   height: 0,
@@ -84,7 +106,7 @@ export default function Task({
   darkMode,
   displayFilter,
 }) {
-  const [editText, setEditText] = useState(false);
+  const [editText, setEditText] = useState(true);
   const [editValue, setEditValue] = useState(text);
   const [editCheck, setEditCheck] = useState(isCompleted);
   const { dispatch } = useTasksContext();
@@ -151,12 +173,13 @@ export default function Task({
           onChange={handleInputChange}
         />
         {editText ? (
-          <input
+          <EditInput
             type="text"
             value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
             onKeyDown={handleClick}
             onBlur={() => setEditText(false)}
+            darkMode={darkMode}
             autoFocus
           />
         ) : (
