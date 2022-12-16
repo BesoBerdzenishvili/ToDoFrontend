@@ -6,7 +6,7 @@ export const useClickOutside = (handler) => {
   const domNode = useRef();
   useEffect(() => {
     const onMouseDown = (event) => {
-      if (!domNode.current.contains(event.target)) {
+      if (!domNode.current?.contains(event.target)) {
         handler();
       }
     };

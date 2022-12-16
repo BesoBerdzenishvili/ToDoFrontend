@@ -64,7 +64,7 @@ const CheckMark = styled("img", {
 });
 
 const Circle = styled("div", {
-  backgroundColor: "$VeryDarkDesaturBlue2",
+  backgroundColor: "transparent",
   width: 33,
   height: 32,
   borderRadius: 44,
@@ -125,11 +125,11 @@ export default function Task({ text, isCompleted, id, darkMode }) {
             htmlFor={id}
             style={{
               backgroundImage:
-                editCheck &&
+                isCompleted &&
                 "linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))",
             }}
           >
-            {editCheck ? (
+            {isCompleted ? (
               <CheckMark src={checkMark} alt="check mark" />
             ) : (
               <Circle />
@@ -138,7 +138,7 @@ export default function Task({ text, isCompleted, id, darkMode }) {
           <Input
             id={id}
             type="checkbox"
-            checked={editCheck}
+            checked={isCompleted}
             onChange={handleInputChange}
           />
           {editText ? (
@@ -154,8 +154,8 @@ export default function Task({ text, isCompleted, id, darkMode }) {
             <p
               onDoubleClick={() => setEditText(true)}
               style={{
-                textDecoration: editCheck && "line-through",
-                color: editCheck && "hsl(234, 11%, 52%)",
+                textDecoration: isCompleted && "line-through",
+                color: isCompleted && "hsl(234, 11%, 52%)",
               }}
             >
               {editValue}
