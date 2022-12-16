@@ -39,6 +39,7 @@ const LeftWrapper = styled("div", {
 
   "& p": {
     marginLeft: 14,
+    wordBreak: "break-word",
   },
 });
 
