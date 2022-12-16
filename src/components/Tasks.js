@@ -3,7 +3,7 @@ import useTasksContext from "../hooks/useTasksContext";
 import Loading from "../assets/Loading";
 import Task from "./Task";
 
-export default function Tasks({ darkMode }) {
+export default function Tasks({ darkMode, taskFilter }) {
   const [loading, setLoading] = useState(null);
 
   const { tasks, dispatch } = useTasksContext();
@@ -29,6 +29,7 @@ export default function Tasks({ darkMode }) {
             text={i.text}
             isCompleted={i.isCompleted}
             darkMode={darkMode}
+            displayFilter={taskFilter}
           />
         ))
       ) : loading ? (
