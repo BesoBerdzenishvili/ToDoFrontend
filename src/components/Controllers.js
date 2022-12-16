@@ -1,5 +1,6 @@
 import { styled } from "../stitches.config";
 import useTasksContext from "../hooks/useTasksContext";
+import TasksFilter from "./TasksFilter";
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -33,7 +34,7 @@ const Wrapper = styled("div", {
   },
 });
 
-export default function Controllers({ darkMode }) {
+export default function Controllers({ darkMode, setFilterTasks }) {
   const { tasks, dispatch } = useTasksContext();
   const handleClick = async () => {
     const response = await fetch("/api/tasks/deleteCompleted", {
@@ -52,6 +53,7 @@ export default function Controllers({ darkMode }) {
         {tasks && tasks.filter((i) => i.isCompleted === false).length} items
         left
       </p>
+      <TasksFilter setFilter={setFilterTasks} mobile={false} />
       <button onClick={handleClick}>Clear Completed</button>
     </Wrapper>
   );

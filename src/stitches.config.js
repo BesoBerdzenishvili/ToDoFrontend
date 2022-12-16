@@ -33,6 +33,7 @@ export const {
   },
   media: {
     bp1: "(max-width: 480px)",
+    bp2: "(max-width: 768px)",
   },
 });
 
@@ -41,6 +42,6 @@ export const globalStyles = globalCss({
   body: {
     fontSize: 18,
     fontFamily: "Josefin Sans, sans-serif",
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "repeat-x",
   },
 });

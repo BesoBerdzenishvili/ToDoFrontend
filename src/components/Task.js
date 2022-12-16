@@ -5,11 +5,11 @@ import cross from "../assets/icon-cross.svg";
 import checkMark from "../assets/icon-check.svg";
 
 const Wrapper = styled("div", {
-  display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   backgroundColor: "white",
   padding: "14px 21px",
+  borderBottom: "1px solid grey",
 
   variants: {
     darkMode: {
@@ -76,7 +76,13 @@ const Circle = styled("div", {
   },
 });
 
-export default function Task({ text, isCompleted, id, darkMode }) {
+export default function Task({
+  text,
+  isCompleted,
+  id,
+  darkMode,
+  displayFilter,
+}) {
   const [editText, setEditText] = useState(false);
   const [editValue, setEditValue] = useState(text);
   const [editCheck, setEditCheck] = useState(isCompleted);
@@ -118,53 +124,53 @@ export default function Task({ text, isCompleted, id, darkMode }) {
     handleClick(e, true);
   };
   return (
-    <>
-      <Wrapper darkMode={darkMode}>
-        <LeftWrapper>
-          <OuterCircle
-            htmlFor={id}
+    <Wrapper
+      darkMode={darkMode}
+      style={{ display: isCompleted === displayFilter ? "none" : "flex" }}
+    >
+      <LeftWrapper>
+        <OuterCircle
+          htmlFor={id}
+          style={{
+            backgroundImage:
+              isCompleted &&
+              "linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))",
+          }}
+        >
+          {isCompleted ? (
+            <CheckMark src={checkMark} alt="check mark" />
+          ) : (
+            <Circle />
+          )}
+        </OuterCircle>
+        <Input
+          id={id}
+          type="checkbox"
+          checked={isCompleted}
+          onChange={handleInputChange}
+        />
+        {editText ? (
+          <input
+            type="text"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onKeyDown={handleClick}
+            onBlur={() => setEditText(false)}
+            autoFocus
+          />
+        ) : (
+          <p
+            onDoubleClick={() => setEditText(true)}
             style={{
-              backgroundImage:
-                isCompleted &&
-                "linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))",
+              textDecoration: isCompleted && "line-through",
+              color: isCompleted && "hsl(234, 11%, 52%)",
             }}
           >
-            {isCompleted ? (
-              <CheckMark src={checkMark} alt="check mark" />
-            ) : (
-              <Circle />
-            )}
-          </OuterCircle>
-          <Input
-            id={id}
-            type="checkbox"
-            checked={isCompleted}
-            onChange={handleInputChange}
-          />
-          {editText ? (
-            <input
-              type="text"
-              value={editValue}
-              onChange={(e) => setEditValue(e.target.value)}
-              onKeyDown={handleClick}
-              onBlur={() => setEditText(false)}
-              autoFocus
-            />
-          ) : (
-            <p
-              onDoubleClick={() => setEditText(true)}
-              style={{
-                textDecoration: isCompleted && "line-through",
-                color: isCompleted && "hsl(234, 11%, 52%)",
-              }}
-            >
-              {editValue}
-            </p>
-          )}
-        </LeftWrapper>
-        <Img src={cross} alt="x" onClick={deleteTask} />
-      </Wrapper>
-      <hr />
-    </>
+            {editValue}
+          </p>
+        )}
+      </LeftWrapper>
+      <Img src={cross} alt="x" onClick={deleteTask} />
+    </Wrapper>
   );
 }

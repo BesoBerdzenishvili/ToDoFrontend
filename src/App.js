@@ -9,6 +9,7 @@ import mobileBGLight from "./assets/bg-mobile-light.jpg";
 import Input from "./components/Input";
 import Tasks from "./components/Tasks";
 import Controllers from "./components/Controllers";
+import TasksFilter from "./components/TasksFilter";
 
 const Wrapper = styled("div", {
   maxWidth: 544,
@@ -17,6 +18,10 @@ const Wrapper = styled("div", {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
+
+  "@bp2": {
+    padding: "0 24px",
+  },
 });
 
 const Header = styled("div", {
@@ -34,6 +39,7 @@ const Img = styled("img", {
   cursor: "pointer",
 });
 function App() {
+  const [filterTasks, setFilterTasks] = useState("all");
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem("darkMode");
     return saved ? JSON.parse(saved) : false;
@@ -74,8 +80,13 @@ function App() {
       </Header>
       <Input darkMode={darkMode} />
       <br />
-      <Tasks darkMode={darkMode} />
-      <Controllers darkMode={darkMode} />
+      <Tasks darkMode={darkMode} taskFilter={filterTasks} />
+      <Controllers darkMode={darkMode} setFilterTasks={setFilterTasks} />
+      <TasksFilter
+        setFilter={setFilterTasks}
+        mobile={true}
+        darkMode={darkMode}
+      />
     </Wrapper>
   );
 }
