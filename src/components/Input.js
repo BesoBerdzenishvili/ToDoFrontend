@@ -63,7 +63,7 @@ const TaskInput = styled("input", {
   variants: {
     darkMode: {
       true: {
-        color: "1px solid white",
+        color: "white",
       },
     },
   },
