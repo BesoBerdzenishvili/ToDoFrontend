@@ -87,7 +87,7 @@ const CheckMark = styled("img", {
 });
 
 const Circle = styled("div", {
-  backgroundColor: "transparent",
+  backgroundColor: "white",
   width: 33,
   height: 32,
   borderRadius: 44,
@@ -96,6 +96,14 @@ const Circle = styled("div", {
   "&:hover": {
     border: "none",
     cursor: "pointer",
+  },
+
+  variants: {
+    darkMode: {
+      true: {
+        background: "$VeryDarkDesaturBlue2",
+      },
+    },
   },
 });
 
@@ -163,7 +171,7 @@ export default function Task({
           {isCompleted ? (
             <CheckMark src={checkMark} alt="check mark" />
           ) : (
-            <Circle />
+            <Circle darkMode={darkMode} />
           )}
         </OuterCircle>
         <Input
