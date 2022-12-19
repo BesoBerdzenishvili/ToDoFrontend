@@ -53,8 +53,8 @@ export default function TasksFilter({ setFilter, mobile, darkMode }) {
     <Wrapper mobile={mobile} darkMode={darkMode}>
       <Ul>
         <li onClick={() => setFilter("all")}>All</li>
-        <li onClick={() => setFilter(false)}>Active</li>
-        <li onClick={() => setFilter(true)}>Completed</li>
+        <li onClick={() => setFilter(true)}>Active</li>
+        <li onClick={() => setFilter(false)}>Completed</li>
       </Ul>
     </Wrapper>
   );
