@@ -80,7 +80,7 @@ function App() {
       </Header>
       <Input darkMode={darkMode} />
       <br />
-      <Tasks darkMode={darkMode} taskFilter={filterTasks} />
+      <Tasks darkMode={darkMode} tasksFilter={filterTasks} />
       <Controllers darkMode={darkMode} setFilterTasks={setFilterTasks} />
       <TasksFilter
         setFilter={setFilterTasks}

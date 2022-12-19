@@ -119,7 +119,7 @@ export default function Task({
   const [editCheck, setEditCheck] = useState(isCompleted);
   const { dispatch } = useTasksContext();
 
-  const handleClick = async (e, check) => {
+  const handleKeyDown = async (e, check) => {
     if (check || e.key === "Enter") {
       e.preventDefault();
       const response = await fetch("/api/tasks/" + id, {
@@ -152,7 +152,7 @@ export default function Task({
 
   const handleInputChange = (e) => {
     setEditCheck(!editCheck);
-    handleClick(e, true);
+    handleKeyDown(e, true);
   };
   return (
     <Wrapper
@@ -185,7 +185,7 @@ export default function Task({
             type="text"
             value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
-            onKeyDown={handleClick}
+            onKeyDown={handleKeyDown}
             onBlur={() => setEditText(false)}
             darkMode={darkMode}
             autoFocus
